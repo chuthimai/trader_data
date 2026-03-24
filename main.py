@@ -70,6 +70,9 @@ if __name__ == '__main__':
         message = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S") + " UTC\n"
         message += (datetime.utcnow() + timedelta(hours=7)).strftime("%Y-%m-%d %H:%M:%S") + " VN\n"
         message += "STOCK CODE | LOW | HIGH | RSI | CHOPPY | SIGNAL\n"
-        message += "\n".join(results)
+        for command in results:
+            if len(command) == 0:
+                continue
+            message += f"\n{command}"
         send_message(message)
 
