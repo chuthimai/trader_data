@@ -2,7 +2,7 @@ name: stock-bot
 
 on:
   schedule:
-    - cron: "25 17 * * *"    # 20:00 VN
+    - cron: "15 0 * * *"    # 20:00 VN
 
 jobs:
   run:
@@ -14,7 +14,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.13"
 
       - name: install packages
         run: pip install -r requirements.txt
