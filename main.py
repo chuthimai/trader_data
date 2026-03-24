@@ -2,7 +2,9 @@ from datetime import datetime, timedelta
 import requests
 import os
 from getting_data.getting_stock_data import GettingStockData
+from dotenv import load_dotenv
 
+load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
@@ -38,17 +40,18 @@ def format_stock(stock_code, data):
     rsi = data["RSI"]
     choppy = data["Choppy"]
 
-    # xác định lệnh
-    command = None
-
-    if choppy < 40:
-        if rsi > 40:
-            command = "SELL"
-        elif rsi < 40:
-            command = "BUY"
-
-    if command is None:
-        return None
+    command = ""
+    # # xác định lệnh
+    # command = None
+    #
+    # if choppy < 40:
+    #     if rsi > 50:
+    #         command = "SELL"
+    #     elif rsi < 40:
+    #         command = "BUY"
+    #
+    # if command is None:
+    #     return None
 
     return f"{stock_code} | {low:.0f} | {high:.0f} | {rsi:.2f} | {choppy:.2f} | {command}"
 
@@ -65,7 +68,9 @@ if __name__ == '__main__':
         results.append(row)
 
     if results:
-        message = "CODE | LOW | HIGH | RSI | CHOPPY | SIGNAL\n"
+        message = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S") + " UTC\n"
+        message += (datetime.utcnow() + timedelta(hours=7)).strftime("%Y-%m-%d %H:%M:%S") + " VN\n"
+        message += "STOCK CODE | LOW | HIGH | RSI | CHOPPY | SIGNAL\n"
         message += "\n".join(results)
         send_message(message)
 
