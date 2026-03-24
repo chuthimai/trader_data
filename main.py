@@ -40,18 +40,17 @@ def format_stock(stock_code, data):
     rsi = data["RSI"]
     choppy = data["Choppy"]
 
-    command = ""
-    # # xác định lệnh
-    # command = None
-    #
-    # if choppy < 40:
-    #     if rsi > 50:
-    #         command = "SELL"
-    #     elif rsi < 40:
-    #         command = "BUY"
-    #
-    # if command is None:
-    #     return None
+    # xác định lệnh
+    command = None
+
+    if choppy < 40:
+        if rsi > 50:
+            command = "SELL"
+        elif rsi < 40:
+            command = "BUY"
+
+    if command is None:
+        return None
 
     return f"{stock_code} | {low:.0f} | {high:.0f} | {rsi:.2f} | {choppy:.2f} | {command}"
 

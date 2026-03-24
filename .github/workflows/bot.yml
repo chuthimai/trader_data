@@ -2,7 +2,7 @@ name: stock-bot
 
 on:
   schedule:
-    - cron: "*/5 * * * *"    # workflow chạy mỗi 5 phút
+    - cron: "0 12 * * *"    # Workflow sẽ chạy 19:00 giờ Việt Nam mỗi ngày
 
 jobs:
   run:
